@@ -87,55 +87,56 @@ public class LvlTwoDialogue extends Fragment  {
     }
     public void goToConfirmPage(View view) {
         uart.setupUart(getContext());
-        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
-                        PackageManager.PERMISSION_GRANTED) {
-            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-            Criteria criteria = new Criteria();
-            Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-            int i = 0;
-            while(location == null){
-                location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
-                if(i > 100){break;}
-                i++;
-            }
-            if(location != null) {
-                MainActivity.lat = location.getLatitude();
-                MainActivity.lon = location.getLongitude();
-            }
-        }
-//        Alert, concat'd id, deviceid, severity, time sent, latitude, longitude
-//        #AT,ID,0,DI,0,SV,0,ST,0,TS,0,LT,0,LN,0~
-        String message1 = "#AT,ID,12349,DI,9~\n";
-        String message2 = "#AT,ST,0~\n";
-        String message3 = "#AT,LT,"+MainActivity.lat+"~\n";
-        String message4 = "#AT,LN,"+MainActivity.lon+"~\n";
-        uart.send(message1);
-        try {
-            //set time in mili
-            Thread.sleep(500);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        uart.send(message2);
-        try {
-            //set time in mili
-            Thread.sleep(500);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        uart.send(message3);
-        try {
-            //set time in mili
-            Thread.sleep(500);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        uart.send(message4);
+//        if (ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+//                PackageManager.PERMISSION_GRANTED &&
+//                ContextCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+//                        PackageManager.PERMISSION_GRANTED) {
+//            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+//            Criteria criteria = new Criteria();
+//            Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+//            int i = 0;
+//            while(location == null){
+//                location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+//                if(i > 100){break;}
+//                i++;
+//            }
+//            if(location != null) {
+//                MainActivity.lat = location.getLatitude();
+//                MainActivity.lon = location.getLongitude();
+//            }
+//        }
+////        Alert, concat'd id, deviceid, severity, time sent, latitude, longitude
+////        #AT,ID,0,DI,0,SV,0,ST,0,TS,0,LT,0,LN,0~
+//        String message1 = "#AT,ID,12349,DI,9~\n";
+//        String message2 = "#AT,ST,0~\n";
+//        String message3 = "#AT,LT,"+MainActivity.lat+"~\n";
+//        String message4 = "#AT,LN,"+MainActivity.lon+"~\n";
+//        uart.send(message1);
+//        try {
+//            //set time in mili
+//            Thread.sleep(500);
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        uart.send(message2);
+//        try {
+//            //set time in mili
+//            Thread.sleep(500);
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        uart.send(message3);
+//        try {
+//            //set time in mili
+//            Thread.sleep(500);
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        uart.send(message4);
+        uart.send("A\n");
         //FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentActivity activity = getActivity();
         FragmentManager fragmentManager = activity.getSupportFragmentManager();
